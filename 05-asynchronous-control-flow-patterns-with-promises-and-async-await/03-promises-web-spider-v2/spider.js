@@ -20,17 +20,17 @@ function download(url, filename) {
 }
 
 function spiderLinks(currentUrl, body, maxDepth) {
-  let promise = Promise.resolve();
+  const promise = Promise.resolve();
   if (maxDepth === 0) {
     return promise;
   }
 
   const links = getPageLinks(currentUrl, body);
-  for (const link of links) {
-    promise = promise.then(() => spider(link, maxDepth - 1));
-  }
 
-  return promise;
+  return links.reduce(
+    (prev, link) => prev.then(() => spider(link, maxDepth - 1)),
+    promise,
+  );
 }
 
 export function spider(url, maxDepth) {

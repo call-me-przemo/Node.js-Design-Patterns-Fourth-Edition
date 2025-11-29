@@ -1,5 +1,4 @@
-import { constants } from "node:fs";
-import { access } from "node:fs/promises";
+import { access, constants } from "node:fs/promises";
 import { extname, join } from "node:path";
 import { Parser } from "htmlparser2";
 import { mkdirp } from "mkdirp";
