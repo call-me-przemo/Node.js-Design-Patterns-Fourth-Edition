@@ -6,7 +6,7 @@
   "scripts": {
     "test": "pnpm run test:lint",
     "test:lint": "biome check",
-    "test:lint-fix": "biome check --write",
+    "test:lint-fix": "biome check --write --unsafe",
     "prepare": "husky"
   },
   "keywords": [

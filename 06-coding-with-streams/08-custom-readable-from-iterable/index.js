@@ -10,5 +10,5 @@ const mountains = [
 
 const mountainsStream = Readable.from(mountains);
 mountainsStream.on("data", (mountain) => {
-  console.log(`${mountain.name.padStart(14)}\t${mountain.height}m`);
+  console.log(`${mountain.name.padEnd(20)}\t${mountain.height}m`);
 });

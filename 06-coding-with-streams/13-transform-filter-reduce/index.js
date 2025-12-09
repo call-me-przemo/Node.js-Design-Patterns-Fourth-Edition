@@ -1,10 +1,32 @@
 import { createReadStream } from "node:fs";
+import { Transform } from "node:stream";
 import { createGunzip } from "node:zlib";
 import { Parser } from "csv-parse";
-import { FilterByCountry } from "./filter-by-country.js";
-import { SumProfit } from "./sum-profit.js";
+
+// import { FilterByCountry } from "./filter-by-country.js";
+// import { SumProfit } from "./sum-profit.js";
 
 const csvParser = new Parser({ columns: true });
+
+function createFilterAndSumStream(country) {
+  let total = 0;
+
+  return new Transform({
+    objectMode: true,
+
+    transform(record, _enc, cb) {
+      if (record.country === country) {
+        total += Number.parseFloat(record.profit);
+      }
+      cb();
+    },
+
+    flush(cb) {
+      this.push(total.toString());
+      cb();
+    },
+  });
+}
 
 // A small difference from the code presented in the book is that
 // here we have gzipped the data to keep the download size of the repository
@@ -13,6 +35,7 @@ const csvParser = new Parser({ columns: true });
 createReadStream("data.csv.gz")
   .pipe(createGunzip())
   .pipe(csvParser)
-  .pipe(new FilterByCountry("Italy"))
-  .pipe(new SumProfit())
+  // .pipe(new FilterByCountry("Italy"))
+  // .pipe(new SumProfit())
+  .pipe(createFilterAndSumStream("Italy"))
   .pipe(process.stdout);

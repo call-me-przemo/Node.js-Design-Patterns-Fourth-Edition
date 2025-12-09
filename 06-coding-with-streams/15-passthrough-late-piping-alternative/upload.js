@@ -12,7 +12,7 @@ export function createUploadStream(filename) {
       },
     })
     .catch((err) => {
-      connector.emit(err);
+      connector.emit("error", err);
     });
 
   return connector;

@@ -17,7 +17,7 @@ function mapAsync<T>(
 
   function map(
     resolve: (value: Array<T>) => void,
-    reject: (reason?: any) => void,
+    reject: (reason?: unknown) => void,
   ) {
     while (running < concurrency && iterator < iterable.length) {
       running++;

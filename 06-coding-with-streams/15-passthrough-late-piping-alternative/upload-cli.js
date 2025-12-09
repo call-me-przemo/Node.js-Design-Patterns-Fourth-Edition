@@ -1,6 +1,6 @@
 import { createReadStream } from "node:fs";
 import { basename } from "node:path";
-import { pipeline } from "node:stream";
+import { pipeline } from "node:stream/promises";
 import { createBrotliCompress } from "node:zlib";
 import { createUploadStream } from "./upload.js";
 
@@ -11,12 +11,6 @@ pipeline(
   createReadStream(filepath),
   createBrotliCompress(),
   createUploadStream(`${filename}.br`),
-  (err) => {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-    }
-
-    console.log("File uploaded");
-  },
-);
+)
+  .then(() => console.log("File uploaded"))
+  .catch(console.error);

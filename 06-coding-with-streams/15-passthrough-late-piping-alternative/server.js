@@ -1,8 +1,10 @@
 import { createWriteStream } from "node:fs";
+import { access, mkdir } from "node:fs/promises";
 import { createServer } from "node:http";
 import { basename, join } from "node:path";
 
 const destDir = join(import.meta.dirname, "received_files");
+await access(destDir).catch(() => mkdir(destDir));
 
 const server = createServer((req, res) => {
   const filename = basename(req.headers["x-filename"]);
