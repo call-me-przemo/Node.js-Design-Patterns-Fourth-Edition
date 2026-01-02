@@ -25,6 +25,7 @@ export function createCompressAndEncrypt(password) {
           this.push(iv);
           ivWrite = true;
         }
+
         this.push(chunk);
         cb();
       },

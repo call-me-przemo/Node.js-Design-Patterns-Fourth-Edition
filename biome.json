@@ -23,7 +23,8 @@
         "useImportType": "off"
       },
       "suspicious": {
-        "useIterableCallbackReturn": "off"
+        "useIterableCallbackReturn": "off",
+        "noAssignInExpressions": "warn"
       }
     }
   },
