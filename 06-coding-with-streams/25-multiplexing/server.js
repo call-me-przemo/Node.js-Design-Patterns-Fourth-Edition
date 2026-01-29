@@ -17,13 +17,13 @@ function demultiplexChannel(source, destinations) {
         chunk = source.read(4);
         currentLength = chunk?.readUInt32BE(0);
         if (currentLength === null) {
-          return null;
+          return;
         }
       }
 
       chunk = source.read(currentLength);
       if (chunk === null) {
-        return null;
+        return;
       }
 
       console.log(`Received packet from: ${currentChannel}`);
