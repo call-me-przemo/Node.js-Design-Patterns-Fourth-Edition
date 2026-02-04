@@ -38,12 +38,18 @@ export class RequestBuilder {
     return this;
   }
 
-  public invoke() {
-    return new Promise<IncomingMessage>((resolve, reject) => {
-      request(this.url, { headers: this.headers, method: this.method }, resolve)
-        .on("error", reject)
-        .end(this.body);
-    });
+  // biome-ignore lint/suspicious/noThenProperty: make object thenable
+  public then(
+    onFulfilled: (res: IncomingMessage) => void,
+    onRejected: (err: Error) => void,
+  ) {
+    request(
+      this.url,
+      { headers: this.headers, method: this.method },
+      onFulfilled,
+    )
+      .on("error", onRejected)
+      .end(this.body);
   }
 }
 

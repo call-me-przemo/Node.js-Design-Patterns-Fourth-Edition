@@ -7,13 +7,12 @@ const postResponse = await new RequestBuilder()
     "Content-Type": "application/json",
     Accept: "application/json",
   })
-  .setBody(JSON.stringify({ name: "John Doe", role: "USER" }))
-  .invoke();
+  .setBody(JSON.stringify({ name: "John Doe", role: "USER" }));
 
 postResponse.pipe(process.stdout);
 
-const getResponse = await new RequestBuilder()
-  .setUrl("http://jsonplaceholder.typicode.com/posts/8")
-  .invoke();
+const getResponse = await new RequestBuilder().setUrl(
+  "http://jsonplaceholder.typicode.com/posts/8",
+);
 
 getResponse.pipe(process.stdout);
