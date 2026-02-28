@@ -9,7 +9,7 @@ export function createCachingFetch(originalFetch: FetchFunction) {
     const res = await originalFetch(input, init);
 
     if (!res.ok) {
-      throw new Error(res.status + " " + res.statusText);
+      throw new Error(`${res.status} ${res.statusText}`);
     }
 
     const body = await res.json();
