@@ -17,23 +17,23 @@ export class Matrix {
     this.data[row][column] = value;
   }
 
-  *[Symbol.iterator]() {
-    for (const row of this.data) {
-      for (const cell of row) {
-        yield cell;
-      }
-    }
-  }
+  // *[Symbol.iterator]() {
+  //   for (const row of this.data) {
+  //     for (const cell of row) {
+  //       yield cell;
+  //     }
+  //   }
+  // }
 
   // // Even more concise using the generator delegation syntax:
   // *[Symbol.iterator]() {
   //   for (const row of this.data) {
-  //     yield* row
+  //     yield* row;
   //   }
   // }
 
-  // // Even (even!) more concise using Array.prototype.flat():
-  // *[Symbol.iterator]() {
-  //   yield* this.data.flat()
-  // }
+  // Even (even!) more concise using Array.prototype.flat():
+  *[Symbol.iterator]() {
+    yield* this.data.flat();
+  }
 }

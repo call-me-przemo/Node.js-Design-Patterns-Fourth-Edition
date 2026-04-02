@@ -1,4 +1,5 @@
 import { createServer } from "node:http";
+import { json } from "node:stream/consumers";
 
 const server = createServer(async (request, response) => {
   if (request.url !== "/cmd") {
@@ -7,10 +8,7 @@ const server = createServer(async (request, response) => {
     return;
   }
 
-  let data = "";
-  for await (const chunk of request) {
-    data += chunk;
-  }
+  const data = await json(request);
 
   console.log("Received the command:", data);
   response.writeHead(200, { "Content-Type": "application/json" });
