@@ -31,12 +31,12 @@ export class BrokenLinksChecker {
         return cb(err);
       }
 
-      if (content.status === 404) {
+      if (content?.status === 404) {
         this.links.push(url);
         return cb();
       }
 
-      const pageLinks = this.getPageLinks(url, content.data);
+      const pageLinks = this.getPageLinks(url, content!.data);
 
       if (!pageLinks.length || !depth) {
         return cb();
