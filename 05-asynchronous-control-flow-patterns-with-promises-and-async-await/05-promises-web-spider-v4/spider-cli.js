@@ -9,5 +9,5 @@ const queue = new TaskQueue(concurrency);
 queue.pushTask(() => spider(url, maxDepth, queue));
 queue.on("error", console.error);
 queue.on("empty", () => {
-  console.log("Download complete");
+  console.log("Download completed");
 });

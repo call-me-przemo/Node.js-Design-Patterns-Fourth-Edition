@@ -20,5 +20,5 @@ function promisify(callbackBasedFn) {
 
 const randomBytesP = promisify(randomBytes);
 randomBytesP(32).then((buffer) => {
-  console.log(`Random bytes: ${buffer.toString()}`);
+  console.log(`Random bytes: ${buffer.toString("base64")}`);
 });

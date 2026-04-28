@@ -4,7 +4,7 @@ const url = process.argv[2];
 const maxDepth = Number.parseInt(process.argv[3], 10) || 1;
 
 spider(url, maxDepth)
-  .then(() => console.log("Downloaded complete"))
+  .then(() => console.log("Download completed"))
   .catch((err) => {
     console.error(err);
     process.exit(1);

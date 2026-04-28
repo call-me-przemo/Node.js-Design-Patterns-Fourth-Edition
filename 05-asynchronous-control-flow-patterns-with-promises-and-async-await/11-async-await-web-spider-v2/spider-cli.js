@@ -5,7 +5,7 @@ const maxDepth = Number.parseInt(process.argv[3], 10) || 1;
 
 try {
   await spider(url, maxDepth);
-  console.log("Downloaded complete");
+  console.log("Download completed");
 } catch (err) {
   console.error(err);
   process.exit(1);
