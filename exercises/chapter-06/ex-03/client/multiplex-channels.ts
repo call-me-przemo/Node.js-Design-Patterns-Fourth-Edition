@@ -7,7 +7,7 @@ export function multiplexChannels(
   let openChannels = sources.length;
   for (let i = 0; i < sources.length; i++) {
     sources[i]
-      .on("readable", function () {
+      .on("readable", function (this: Readable) {
         let chunk: Buffer;
         // biome-ignore lint/suspicious/noAssignInExpressions: idiomatic
         while ((chunk = this.read()) !== null) {
