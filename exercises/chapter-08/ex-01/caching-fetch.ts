@@ -12,11 +12,11 @@ export function createCachingFetch(originalFetch: FetchFunction) {
       throw new Error(`${res.status} ${res.statusText}`);
     }
 
-    const body = await res.json();
+    const body = await res.text();
 
     cache.set(input, body);
 
-    return res;
+    return body;
   };
 }
 
