@@ -1,24 +1,25 @@
-export function createCachingFetch(originalFetch: FetchFunction) {
-  const cache = new Map<Input, unknown>();
+export function createCachingFetch() {
+  const cache = new Map<FetchInput, string>();
 
-  return async (input: Input, init?: RequestInit) => {
-    if (cache.has(input)) {
-      return cache.get(input);
-    }
+  return new Proxy(fetch, {
+    async apply(target, _this, args: [FetchInput, RequestInit?]) {
+      if (cache.has(args[0])) {
+        return cache.get(args[0]);
+      }
 
-    const res = await originalFetch(input, init);
+      const res = await target(...args);
 
-    if (!res.ok) {
-      throw new Error(`${res.status} ${res.statusText}`);
-    }
+      if (!res.ok) {
+        throw new Error(`${res.status} ${res.statusText}`);
+      }
 
-    const body = await res.text();
+      const data = await res.text();
 
-    cache.set(input, body);
+      cache.set(args[0], data);
 
-    return body;
-  };
+      return data;
+    },
+  });
 }
 
-type FetchFunction = (input: Input, init?: RequestInit) => Promise<Response>;
-type Input = string | URL | Request;
+type FetchInput = URL | RequestInfo;

@@ -1,6 +1,6 @@
 import { createCachingFetch } from "./caching-fetch";
 
-const cachingFetch = createCachingFetch(fetch);
+const cachingFetch = createCachingFetch();
 
 const resOne = await cachingFetch("https://jsonplaceholder.typicode.com/posts");
 console.log(resOne);
