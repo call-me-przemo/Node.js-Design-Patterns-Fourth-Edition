@@ -1,20 +1,26 @@
 // @ts-nocheck
+import { Buffer } from "node:buffer";
 
-export function createLazyBuffer(size: number): Buffer {
-  let buffer = null;
+export function createLazyBuffer(size: number) {
+  let buffer: Buffer | null = null;
 
-  return new Proxy(
-    {},
-    {
-      get(target, property, _reciver) {
-        if (!buffer && property === "write") {
+  return new Proxy(Buffer.alloc(0), {
+    get(target, property, _receiver) {
+      if (!buffer) {
+        if (property === "write") {
           buffer = Buffer.alloc(size);
+
+          return buffer.write.bind(buffer);
         }
 
-        return typeof buffer[property] === "function"
-          ? buffer[property].bind(buffer)
-          : buffer[property];
-      },
+        return typeof target[property] === "function"
+          ? target[property].bind(target)
+          : target[property];
+      }
+
+      return typeof buffer[property] === "function"
+        ? buffer[property].bind(buffer)
+        : buffer[property];
     },
-  );
+  });
 }
