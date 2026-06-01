@@ -7,15 +7,13 @@ export function createLazyBuffer(size: number) {
   return new Proxy(Buffer.alloc(0), {
     get(target, property, _receiver) {
       if (!buffer) {
-        if (property === "write") {
-          buffer = Buffer.alloc(size);
-
-          return buffer.write.bind(buffer);
+        if (property !== "write") {
+          return typeof target[property] === "function"
+            ? target[property].bind(target)
+            : target[property];
         }
 
-        return typeof target[property] === "function"
-          ? target[property].bind(target)
-          : target[property];
+        buffer = Buffer.alloc(size);
       }
 
       return typeof buffer[property] === "function"
