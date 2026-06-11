@@ -3,19 +3,19 @@
 import { styleText } from "node:util";
 
 export function createColoredConsole(console: Console): ExtendedConsole {
-  console.red = (msg: string) => {
+  console.red = function (msg: string) {
     const styledMsg = styleText("red", msg);
-    console.log(styledMsg);
+    this.log(styledMsg);
   };
 
-  console.yellow = (msg: string) => {
+  console.yellow = function (msg: string) {
     const styledMsg = styleText("yellow", msg);
-    console.log(styledMsg);
+    this.log(styledMsg);
   };
 
-  console.green = (msg: string) => {
+  console.green = function (msg: string) {
     const styledMsg = styleText("green", msg);
-    console.log(styledMsg);
+    this.log(styledMsg);
   };
 
   return console;
