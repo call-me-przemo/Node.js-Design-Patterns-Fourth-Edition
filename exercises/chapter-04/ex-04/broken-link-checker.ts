@@ -69,7 +69,7 @@ export class BrokenLinksChecker {
       .catch((err) => cb(err));
   }
 
-  private getPageLinks(currentUrl: string, body: string) {
+  private getPageLinks(currentUrl: string, body?: string) {
     const url = new URL(currentUrl);
     const internalLinks = new Array<string>();
     const parser = new Parser({
