@@ -12,9 +12,9 @@
   "author": "Luciano Mammino and Mario Casciaro",
   "license": "MIT",
   "devDependencies": {
-    "@playwright/test": "^1.51.1",
-    "@types/node": "^22.14.0",
-    "testcontainers": "^10.24.1",
-    "typescript": "^5.8.3"
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^22.20.4",
+    "testcontainers": "^10.28.0",
+    "typescript": "^5.9.3"
   }
 }

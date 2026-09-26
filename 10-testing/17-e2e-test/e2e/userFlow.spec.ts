@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 // import { GenericContainer } from 'testcontainers'
 
 test("A user can sign up and book an event", async ({ page }) => {
+  // Unfortunately, the test container approach doesn't work correctly
   // starts the app in a container
   // const appContainer = await new GenericContainer(
   //   'ghcr.io/lmammino/sample-events-website:main'
@@ -41,7 +42,7 @@ test("A user can sign up and book an event", async ({ page }) => {
   // a "Booked" note on the page and that
   // the "reserve" button says "You have booked this event!" and is now disabled
   await expect(page.getByTestId("badge").first()).toHaveText("Booked");
-  const bookButton = await page.getByRole("button", {
+  const bookButton = page.getByRole("button", {
     name: "You have booked this event!",
   });
   await expect(bookButton).toBeDisabled();
@@ -61,6 +62,6 @@ test("A user can sign up and book an event", async ({ page }) => {
   ).toBeVisible();
 
   expect(
-    await page.getByRole("heading", { name: "Marathon City Run" }),
+    page.getByRole("heading", { name: "Marathon City Run" }),
   ).toBeVisible();
 });
