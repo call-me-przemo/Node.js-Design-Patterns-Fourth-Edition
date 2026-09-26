@@ -16,7 +16,7 @@ suite("Booking integration tests", { concurrency: true }, () => {
       payload: { name: "Event 1", totalSeats: 2 },
     });
     assert.equal(createEventResponse.statusCode, 201);
-    const eventData = createEventResponse.json();
+    const eventData = await createEventResponse.json();
     const reserveUrl = `/events/${eventData.eventId}/reservations`;
 
     const res1 = await app.inject({
