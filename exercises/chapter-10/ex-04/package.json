@@ -1,0 +1,29 @@
+{
+  "name": "ex-04",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "tsx --test --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.6.0",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@12.6.0",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "tsx": "^4.23.15"
+  },
+  "dependencies": {
+    "sqlite": "^5.1.1",
+    "sqlite3": "^6.0.1"
+  }
+}
