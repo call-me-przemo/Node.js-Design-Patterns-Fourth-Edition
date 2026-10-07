@@ -1,6 +1,6 @@
 import { createServer } from "node:http";
-// import { totalSales } from './totalSales.js'
-// import { totalSales } from './totalSalesBatch.js'
+// import { totalSales } from "./totalSales.js";
+// import { totalSales } from "./totalSalesBatch.js";
 import { totalSales } from "./totalSalesCache.js";
 
 createServer(async (req, res) => {

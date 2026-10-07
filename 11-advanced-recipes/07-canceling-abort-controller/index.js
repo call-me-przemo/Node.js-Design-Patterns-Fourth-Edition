@@ -1,16 +1,14 @@
+import { callIfNotAborted } from "./abortWrapper.js";
 import { asyncRoutine } from "./asyncRoutine.js";
 
 async function cancelable(abortSignal) {
-  abortSignal.throwIfAborted();
-  const resA = await asyncRoutine("A");
+  const resA = await callIfNotAborted(abortSignal, asyncRoutine, "A");
   console.log(resA);
 
-  abortSignal.throwIfAborted();
-  const resB = await asyncRoutine("B");
+  const resB = await callIfNotAborted(abortSignal, asyncRoutine, "B");
   console.log(resB);
 
-  abortSignal.throwIfAborted();
-  const resC = await asyncRoutine("C");
+  const resC = await callIfNotAborted(abortSignal, asyncRoutine, "C");
   console.log(resC);
 }
 
