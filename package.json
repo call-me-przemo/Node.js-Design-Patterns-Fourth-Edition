@@ -20,6 +20,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.3",
     "@types/node": "^24.10.0",
+    "autocannon": "^8.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.6"
   },

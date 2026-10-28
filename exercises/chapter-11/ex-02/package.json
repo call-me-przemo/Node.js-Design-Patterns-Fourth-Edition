@@ -1,0 +1,32 @@
+{
+  "name": "ex-02",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx --watch src/server.ts",
+    "seed-db": "tsx src/populate-db.ts",
+    "test-perf": "autocannon 'http://localhost:8001/?product=book'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.14.0",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@12.14.0",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "autocannon": "^8.0.0",
+    "tsx": "^4.23.15"
+  },
+  "dependencies": {
+    "level": "^10.0.0",
+    "nanoid": "^6.0.2"
+  }
+}
